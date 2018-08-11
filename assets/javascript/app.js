@@ -11,6 +11,7 @@
     firebase.initializeApp(config);
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 $("#searchButton").on("click", function() {
     
     //loads the Iframe player API code asynchronously
@@ -30,7 +31,7 @@ $("#searchButton").on("click", function() {
                 "onStateChange": onPlayerStateChange
             }
         });
-    }
+    
     function onPlayerReady(event) {
         event.target.playVideo();
     }
@@ -43,6 +44,7 @@ $("#searchButton").on("click", function() {
     function stopVideo() {
         player.stopVideo();
     }
+}
     var ytrailer = $(this).attr("data-movie");
     var  queryURL = "https://youtube.com/watch?v=" + ytrailer + "&key=API_key";
     $.ajax({
