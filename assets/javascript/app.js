@@ -1,5 +1,3 @@
-<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
-
 var config = {
     apiKey: "AIzaSyB1sV3YvbPdUlAkg6AL6O3SyIk_tQFUPNQ",
     authDomain: "project-one-29a01.firebaseapp.com",
@@ -10,13 +8,29 @@ var config = {
 };
 firebase.initializeApp(config);
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 function getTubey(event) {
-    
-    
+    var text = $(event.target).text();
+    var userSubmit = $("<input>");
+    userSubmit.attr("type", "text");
+    userSubmit.addClass("usertext");
+    var ytrailer = $(this).attr("data-movie");
+    var queryURL = "https://youtube.com/watch?v=" + ytrailer + "&key=AIzaSyCiLx7vHvqWnU76n3X0I03awrOaV3pbk4Q";
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    })
+        .then(function (response) {
+            console.log(response);
+            console.log(queryURL);
+            var results = response.data;
 
-    $("#searchButton").on("click", function () {
+            for (i = 0; i < results.length; i++) {
+                ytrailer = player.videoId;
+
+            }
+        });
+
+    $("#searchButton").on("click", function (event) {
         document.preventDefault();
         //loads the Iframe player API code asynchronously
         var tag = document.createElement("script");
@@ -48,22 +62,9 @@ function getTubey(event) {
         function stopVideo() {
             player.stopVideo();
         }
-        
-        
-        var queryURL = "https://youtube.com/watch?v=" + ytrailer + "&key=API_key";
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-            .then(function (response) {
-                console.log(response);
-                console.log(queryURL);
-                var results = response.data;
-
-                for (i=0; i<results.length; i++) {
-                    results = player.videoId;
-
-                }
-            });
     });
 }
+function load() {
+    $(document.body).on("click", "#searchButton", getTubey);
+};
+
