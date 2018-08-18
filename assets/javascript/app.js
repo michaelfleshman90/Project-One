@@ -90,5 +90,6 @@ function handleAPILoaded() {
   $("#search-button").on("click", function(event) {
       event.preventDefault();
       search();
+      
   })
 
