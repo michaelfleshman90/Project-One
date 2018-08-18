@@ -74,21 +74,24 @@ function handleAPILoaded() {
   }
   
   // Search for a specified string.
-  function search() {
-    var q = $('#query').val();
-    var request = gapi.client.youtube.search.list({
-      q: q,
-      part: 'snippet'
+$(function() {
+    $("#search-button").on("click", function(event) {
+        event.preventDefault();
+        //search();
+        //function search() {
+            var query = encodeURIComponent($('#query').val());
+            var request = gapi.client.youtube.search.list({
+                q: query,
+                part: 'snippet',
+                type: 'video',
+                maxResults: 3,
+                order: "viewCount"
+            });
+            request.execute(function(response) {
+                console.log(response);
+                var str = JSON.stringify(response.result);
+                $('#youtubeDiv').html('<pre>' + str + '</pre>');
+            });
+        //};
     });
-  
-    request.execute(function(response) {
-      var str = JSON.stringify(response.result);
-      $('#youtubeDiv').html('<pre>' + str + '</pre>');
-    });
-  }
-
-  $("#search-button").on("click", function(event) {
-      event.preventDefault();
-      search();
-  })
-
+})
