@@ -18,8 +18,8 @@
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=PT+Sans:700|Josefin+Sans:300" rel="stylesheet">
 </head>
-
-<body onload="load();" class="container background">
+<!--onload="load();"-->
+<body  class="container background">
     
     <div class="row center">
         <div class="col-12">
@@ -33,9 +33,9 @@
             <h3 class="cyan-text text-center fontOverride2">Search a movie. Find a stream!</h3>
 
             <!-- searchbar -->
-            <form class="form-inline active-cyan-3 active-cyan-4 justify-content-center p-4 fontOverride">
-                    <button class="fa fa-search" aria-hidden="true" id="searchButton"></button>
-                    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+            <form class="form-inline active-cyan-3 active-cyan-4 justify-content-center p-4 fontOverride" id="myForm">
+                    <button class="fa fa-search" aria-hidden="true" id="searchButton" type="button"></button>
+                    <input class="form-control form-control-sm ml-3 w-75" type="text" id="userSearch" placeholder="Search" aria-label="Search">
             </form>
         </div>
 
@@ -54,9 +54,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/js/mdb.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
 </body>
 </html>
 
 <!-- TODO -->
-
-
