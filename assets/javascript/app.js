@@ -39,20 +39,8 @@
 //         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 //         var player;
 
-//         function onYouTubeIframeAPIReady() {
-//             player = new YT.Player("youtubeDiv", {
-//                 height: "390",
-//                 width: "640",
-//                 videoId: "",
-//                 events: {
-//                     "onReady": onPlayerReady,
-//                     "onStateChange": onPlayerStateChange
-//                 }
-//             });
-//         };
-//         function onPlayerReady(event) {
-//             event.target.playVideo();
-//         }
+
+         
 //         var done = false;
 //         function onPlayerStateChange(event) {
 //             if (event.data == YT.PlayerState.PLAYING && !done) {
@@ -67,12 +55,25 @@
 // function load() {
 //     $(document.body).on("click", "#searchButton", getTubey);
 // };
-
+//function awesome(e, t){res=e;for(var n=0;n<t.length;n++){res=res.replace(/\{\{.*?}\}\}/g, function(e,r){return t[n][r]})}return res}
 // After the API loads, call a function to enable the search box.
 function handleAPILoaded() {
     $('#search-button').attr('disabled', false);
   }
-  
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("youtubeDiv", {
+        height: "390",
+        width: "640",
+        videoId: "",
+        events: {
+            "onReady": onPlayerReady,
+            "onStateChange": onPlayerStateChange
+        }
+    });
+};
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
   // Search for a specified string.
 $(function() {
     $("#search-button").on("click", function(event) {
@@ -84,12 +85,16 @@ $(function() {
                 q: query,
                 part: 'snippet',
                 type: 'video',
-                maxResults: 3,
+                maxResults: 1,
                 order: "viewCount"
             });
             request.execute(function(response) {
-                console.log(response);
+                var results = response.result;
+                $.each(results.items, function(index, item) {
+
+                })
                 var str = JSON.stringify(response.result);
+                console.log(response);
                 $('#youtubeDiv').html('<pre>' + str + '</pre>');
             });
         //};
