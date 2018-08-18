@@ -52,15 +52,16 @@
     color: #4dd0e1;
 }
 
-#search-button {
-    background: none !important;
-    border: none !important;
-    outline: none !important;
+#search-button{
+    background: none;
+    border: none;
+    outline: none;
     cursor: pointer;
     transition: ease-in-out .5s;
 }
 
-#searchButton:hover {
+
+#search-button:hover {
     color: white;
     transform: scale(1.5);
 }
