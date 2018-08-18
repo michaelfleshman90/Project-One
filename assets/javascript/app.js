@@ -70,6 +70,7 @@ function handleAPILoaded() {
             "onStateChange": onPlayerStateChange
         }
     });
+
 };
 function onPlayerReady(event) {
     event.target.playVideo();
@@ -78,7 +79,7 @@ function onPlayerReady(event) {
 $(function() {
     $("#search-button").on("click", function(event) {
         event.preventDefault();
-        //search();
+        search();
         //function search() {
             var query = encodeURIComponent($('#query').val());
             var request = gapi.client.youtube.search.list({
@@ -91,6 +92,7 @@ $(function() {
             request.execute(function(response) {
                 var results = response.result;
                 $.each(results.items, function(index, item) {
+
 
                 })
                 var str = JSON.stringify(response.result);
