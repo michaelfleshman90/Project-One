@@ -91,3 +91,4 @@ function handleAPILoaded() {
       event.preventDefault();
       search();
   })
+
