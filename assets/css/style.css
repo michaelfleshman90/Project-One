@@ -1,5 +1,6 @@
 
 
+
 .background {
     background-image: url("../Images/what-the-hex-dark.png");
 }
@@ -51,15 +52,17 @@
     color: #4dd0e1;
 }
 
-#searchButton {
-    background: none !important;
-    border: none !important;
-    outline: none !important;
+#search-button{
+    background: none;
+    border: none;
+    outline: none;
     cursor: pointer;
     transition: ease-in-out .5s;
 }
 
-#searchButton:hover {
+
+#search-button:hover {
     color: white;
     transform: scale(1.5);
 }
+

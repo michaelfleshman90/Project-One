@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Group Project - Stream Finder </title>
-<!-- Bootstrap -->
-<!-- Font Awesome -->
+<!-- authorization for youtube api -->
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="assets/javascript/youtube_init.js"></script>
+
+    
+    
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Bootstrap core CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -18,8 +23,10 @@
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=PT+Sans:700|Josefin+Sans:300" rel="stylesheet">
 </head>
-<!--onload="load();"-->
-<body  class="container background">
+
+
+<body class="container background">
+
     
     <div class="row center">
         <div class="col-12">
@@ -33,28 +40,33 @@
             <h3 class="cyan-text text-center fontOverride2">Search a movie. Find a stream!</h3>
 
             <!-- searchbar -->
-            <form class="form-inline active-cyan-3 active-cyan-4 justify-content-center p-4 fontOverride" id="myForm">
-                    <button class="fa fa-search" aria-hidden="true" id="searchButton" type="button"></button>
-                    <input class="form-control form-control-sm ml-3 w-75" type="text" id="userSearch" placeholder="Search" aria-label="Search">
+
+            <form class="form-inline active-cyan-3 active-cyan-4 justify-content-center p-4 fontOverride">
+                    <button class="fa fa-search" aria-hidden="true" id="search-button"></button>
+                    <input class="form-control form-control-sm ml-3 w-75" type="text" id="query" placeholder="Search" aria-label="Search">
+
             </form>
         </div>
 
-        <div id="youtubeDiv"></div>
+        <div class="text-white" id="youtubeDiv"></div>
     </div>
-    
-<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>        
-    <!-- Bootstrap JS -->
+     
+   
     <!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/js/mdb.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!-- link to local Javascript -->
+      <script src="assets/javascript/app.js"></script>  
+    <!-- Bootstrap JS -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/js/mdb.min.js"></script>
+    
+
 </body>
 </html>
 
