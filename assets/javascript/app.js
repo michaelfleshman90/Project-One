@@ -55,50 +55,52 @@
 // function load() {
 //     $(document.body).on("click", "#searchButton", getTubey);
 // };
-//function awesome(e, t){res=e;for(var n=0;n<t.length;n++){res=res.replace(/\{\{.*?}\}\}/g, function(e,r){return t[n][r]})}return res}
+function awesome(e, t){res=e;for(var n=0;n<t.length;n++){res=res.replace(/\{\{.*?}\}\}/g, function(e,r){return t[n][r]})}return res}
 // After the API loads, call a function to enable the search box.
 function handleAPILoaded() {
     $('#search-button').attr('disabled', false);
   }
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player("youtubeDiv", {
-        height: "390",
-        width: "640",
-        videoId: "",
-        events: {
-            "onReady": onPlayerReady,
-            "onStateChange": onPlayerStateChange
-        }
-    });
-
+function onYouTubeIframeAPIReady() {
+player = new YT.Player("#youtubeDiv", {
+    height: "390",
+    width: "640",
+    videoId: "",
+    events: {
+        "onReady": onPlayerReady,
+        "onStateChange": onPlayerStateChange
+    }
+});
 };
 function onPlayerReady(event) {
     event.target.playVideo();
 }
   // Search for a specified string.
-$(function() {
-    $("#search-button").on("click", function(event) {
-        event.preventDefault();
-        search();
-        //function search() {
-            var query = encodeURIComponent($('#query').val());
-            var request = gapi.client.youtube.search.list({
-                q: query,
-                part: 'snippet',
-                type: 'video',
-                maxResults: 1,
-                order: "viewCount"
-            });
-            request.execute(function(response) {
-                var results = response.result;
-                $.each(results.items, function(index, item) {
-
-
-                })
-                var str = JSON.stringify(response.result);
-                console.log(response);
-                $('#youtubeDiv').html('<pre>' + str + '</pre>');
-            });
-        //};
+function search() {
+    var query = encodeURIComponent($('#query').val() + "official trailer");
+    var request = gapi.client.youtube.search.list({
+        q: query,
+        part: 'snippet',
+        type: 'video',
+        maxResults: 1,
+        order: "viewCount"
     });
-})
+    request.execute(function(response) {
+        var results = response.result;
+        $.get("youtube/item", function(data) {
+            $("#youtubeDiv").append(awesome(data, [{ "videoId":results.items.id.videoId}]));
+        })
+        $.get("youtube/title", function(data) {
+            $("#trailerTitleDiv").append(awesome(data, [{ "title":results.items.snippet.title, "videoId":results.items.id.videoId}]));
+        })
+        var str = JSON.stringify(results);
+        console.log(results);
+        //var ytObj = JSON.parse(response.result);
+        //console.log(ytObj);
+        //$('#youtubeDiv').html('<pre>' + str + '</pre>');
+        //$('#youtubeDiv').html('<pre>' + ytObj + '</pre>');
+    });
+};
+$("#search-button").on("click", function(event) {
+    event.preventDefault();
+    search();
+});
