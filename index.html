@@ -1,82 +1,179 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Group Project - Stream Finder </title>
-<!-- authorization for youtube api -->
-<script src="https://apis.google.com/js/api.js"></script>
-<script src="assets/javascript/youtube_init.js"></script>
 
-    
-    
-<!-- Google icon -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- Bootstrap core CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-<!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/css/mdb.min.css" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="assets/css/style.css">
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=PT+Sans:700|Josefin+Sans:300" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Group Project - Stream Finder </title>
+  <!-- authorization for youtube api -->
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="assets/javascript/youtube_init.js"></script>
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+  <!-- Google icon -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/css/mdb.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:700|Josefin+Sans:300" rel="stylesheet">
 </head>
 
 
 <body class="container background">
 
-    
-    <div class="row center">
-        <div class="col-12">
 
-            <!-- logo -->
-            <!-- <img class="logo center" src="assets/Images/noun_river_175419.png" alt="logo"> -->
+  <div class="row center">
+    <div class="col-12">
 
-            <!-- header --> 
-            <h1 class="cyan-text text-center display-1 fontOverride">Movie Search</h1>
-            <!-- sub header -->
-            <h3 class="cyan-text text-center fontOverride2">*Placeholder*</h3>
+      <!-- logo -->
+      <!-- <img class="logo center" src="assets/Images/noun_river_175419.png" alt="logo"> -->
 
-            <!-- searchbar -->
+      <!-- header -->
+      <h1 class="cyan-text text-center display-1 fontOverride">Movie Search</h1>
+      <!-- sub header -->
+      <h3 class="cyan-text text-center fontOverride2">Search for the trailer</h3>
 
-            <form class="form-inline active-cyan-3 active-cyan-4 justify-content-center p-4 fontOverride">
-                    <button class="fa fa-search" aria-hidden="true" id="search-button"></button>
-                    <input class="form-control form-control-sm ml-3 w-75" type="text" id="query" placeholder="Search" aria-label="Search">
+      <!-- searchbar -->
 
-            </form>
-        </div>
+      <form class="form-inline active-cyan-3 active-cyan-4 justify-content-center p-4 fontOverride">
+        <button class="fa fa-search" aria-hidden="true" id="search-button"></button>
+        <input class="form-control form-control-sm ml-3 w-75" type="text" id="query" placeholder="Search" aria-label="Search">
+
+      </form>
+    </div>
 
 
-        <div class="row"></div>
-        <div class="col-12" id="youtubeDiv"></div>
-            <i class="material-icons">
-              movie
-            </i>
-           <i class="material-icons">
-              supervised_user_circle
-          </i>
-           </div>
-     
-   
-    <!-- JQuery -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <!-- link to local Javascript -->
-      <script src="assets/javascript/app.js"></script>  
-      <script src="assets/javascript/buttons.js"></script>
-    <!-- Bootstrap JS -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/js/mdb.min.js"></script>
-    
+    <div class="row"></div>
+    <div class="trailerTitleDiv" id="castBtn">
+
+    </div>
+    <div class="col-12" id="youtubeDiv"></div>
+    <i class="material-icons" id="movieBtn">
+      movie
+    </i>
+    <i class="material-icons">
+      supervised_user_circle
+    </i>
+  </div>
+
+
+  <div id="player"></div>
+
+  <script>
+    // 2. This code loads the IFrame Player API code asynchronously.
+    // document.getElementById("search-button").addEventListener("click", onYouTubeIframeAPIReady);
+
+    function handleAPILoaded() {
+      $('#search-button').attr('disabled', false);
+    }
+
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady(id) {
+
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      console.log(id);
+
+
+      player = new YT.Player('player', {
+        height: '390',
+        width: '640',
+        videoId: id,
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+      event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.PLAYING && !done) {
+        setTimeout(stopVideo, 6000);
+        done = true;
+      }
+    }
+    function stopVideo() {
+      player.stopVideo();
+    }
+
+    function search() {
+      var query = encodeURIComponent($('#query').val());
+      var request = gapi.client.youtube.search.list({
+        q: query,
+        part: 'snippet',
+        type: 'video',
+        maxResults: 1,
+        order: "viewCount"
+      });
+      request.execute(function (response) {
+        var results = response.items[0].id.videoId;
+
+        onYouTubeIframeAPIReady(results);
+
+      });
+
+    };
+
+    $("#search-button").on("click", function (event) {
+      event.preventDefault();
+      search();
+    });
+
+    $("movieBtn").on("click", function (event) {
+      event.preventDefault();
+
+    });
+
+    $("castBtn").on("click", function (event) {
+      event.preventDefault();
+
+    });
+  </script>
+
+
+
+
+  <!-- link to local Javascript -->
+  <script src="assets/javascript/app.js"></script>
+  <script src="assets/javascript/buttons.js"></script>
+  <!-- Bootstrap JS -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/js/mdb.min.js"></script>
+
 </body>
+
 </html>
 
 <!-- TODO -->
